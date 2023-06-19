@@ -1,0 +1,19 @@
+{
+  "name": "7comm-febraban",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd frontend && yarn start",
+    "compile": "cd backend && truffle compile",
+    "migrate": "cd backend && truffle migrate",
+    "test": "cd backend && truffle test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.1.12",
+    "dotenv": "^16.3.1"
+  }
+}
