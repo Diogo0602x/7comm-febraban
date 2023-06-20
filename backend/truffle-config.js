@@ -1,18 +1,23 @@
 require("dotenv").config();
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-const infuraKey = process.env.BESU_RPC;
 
 module.exports = {
   networks: {
     development: {
-      provider: () => new HDWalletProvider(process.env.PRIVATE_KEY, infuraKey),
+      provider: () => new HDWalletProvider(process.env.PRIVATE_KEY, process.env.BESU_RPC),
       network_id: "*",
       gasPrice: 0
     },
   },
   compilers: {
     solc: {
-      version: "^0.8.0",
+      version: "0.8.0",
+      settings: {
+       optimizer: {
+         enabled: false,
+         runs: 200
+       },
+      }
     },
   },
 };

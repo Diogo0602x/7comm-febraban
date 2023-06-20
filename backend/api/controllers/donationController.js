@@ -1,4 +1,4 @@
-const Web3 = require('web3');
+const { Web3 } = require('web3');
 require('dotenv').config();
 
 const web3 = new Web3(process.env.BESU_RPC); // Update this line
@@ -11,7 +11,7 @@ exports.addDonation = async (req, res) => {
   const { name, quantity, id } = req.body;
   
   try {
-    const account = web3.eth.accounts.privateKeyToAccount(process.env.PRIVATE_KEY);
+    const account = web3.eth.accounts.privateKeyToAccount("0x" + process.env.PRIVATE_KEY);
     web3.eth.accounts.wallet.add(account);
     web3.eth.defaultAccount = account.address;
   
