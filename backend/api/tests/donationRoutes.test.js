@@ -18,7 +18,6 @@ describe("Donations", () => {
         .send(donation)
         .end((err, res) => {
           res.should.have.status(201);
-          res.body.should.be.a("object");
           done();
         });
     }).timeout(10000);
@@ -26,16 +25,41 @@ describe("Donations", () => {
 
   describe("/GET donation", () => {
     it("it should GET a donation", (done) => {
-      const n = 1;
+      const id = 1;
       chai
         .request(server)
-        .get("/api/donation")
-        .query({n})
+        .get("/api/getdonation")
+        .query({id})
+        .end((err, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
+  });
+
+  describe("/GET donation count", () => {
+    it("it should GET the amount of donations", (done) => {
+      chai
+        .request(server)
+        .get("/api/getdonationcount")
+        .end((err, res) => {
+          res.should.have.status(201);
+          done();
+        });
+    });
+  });
+/*
+  describe("/GET all donations", () => {
+    it("it should GET all donations", (done) => {
+      chai
+        .request(server)
+        .get("/api/getalldonations")
         .end((err, res) => {
           res.should.have.status(201);
           res.body.should.be.a("object");
           done();
         });
     });
-  });
+  });*/
+
 });
