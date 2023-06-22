@@ -16,6 +16,7 @@
     "@syncfusion/ej2-react-lists": "^21.2.9",
     "antd": "^5.6.1",
     "autoprefixer": "^10.4.14",
+    "axios": "^1.4.0",
     "date-fns": "^2.30.0",
     "ethers": "^6.6.0",
     "phosphor-react": "^1.4.1",
