@@ -7,8 +7,10 @@ const port = 3000;
 
 app.use(bodyParser.json());
 
-app.use('/api/donations', require('./api/routes/donationRoutes'));
-
-app.listen(port, () => {
+app.use('/api', require('./api/routes/donationRoutes'));
+  
+const server = app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+module.exports = server;
