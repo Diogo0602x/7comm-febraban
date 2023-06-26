@@ -44,18 +44,18 @@ exports.getDonation = async(req, res) => {
   
     var from = 194190;
     var n = 1000;
-    var resultfinal = []
+    var resulttotal = []
       
     while( from <= blocknumber ) {
       var to = from + n > blocknumber ? blocknumber : from + n ;
       var result = await contract.getPastEvents('DonationAdded', {
-        filter: { donorNameHash: web3.utils.sha3(web3.eth.abi.encodeParameter("string", req.query.name))},
+        //filter: { donorNameHash: web3.utils.sha3(web3.eth.abi.encodeParameter("string", req.query.name))},
         fromBlock: from,
         toBlock: to
       });
       from += n;
       for(var i = 0; i < result.length; i++){
-        resultfinal.push({
+        resulttotal.push({
           id: Number(result[i].returnValues.id),
           name: result[i].returnValues.donorName, 
           amount: Number(parseFloat(result[i].returnValues.amount)/100).toFixed(2),
@@ -63,7 +63,8 @@ exports.getDonation = async(req, res) => {
           transactionId: result[i].transactionHash })
       }
     }
-
+    
+    var resultfinal = resulttotal.filter(obj => obj.name.indexOf(req.query.name) > -1);
     res.status(201).json(resultfinal);
     res.send();
 
