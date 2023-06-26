@@ -1,9 +1,20 @@
 import React from 'react'
-import donations from '../constants/donations'
 import { formatTimestamp } from '../functions/formatTimestamp'
-import { Table } from 'antd'
+import { Table, Spin, Alert } from 'antd'
+import useFetch from '../hooks/useFetch'
+import formatCurrency from '../functions/formatCurrency'
 
-function TableComponent() {
+interface TableProps {
+  searchValue: string
+}
+
+function TableComponent({ searchValue }: TableProps) {
+  const url = searchValue
+    ? `http://besufbt.eastus.cloudapp.azure.com/api/getdonation?name=${searchValue}`
+    : 'http://besufbt.eastus.cloudapp.azure.com/api/getalldonations'
+
+  const { data: donations, isLoading, error } = useFetch(url)
+
   const columns = [
     {
       title: 'De',
@@ -14,6 +25,7 @@ function TableComponent() {
       title: 'Valor',
       dataIndex: 'amount',
       key: 'amount',
+      render: (amount: string) => formatCurrency(amount),
     },
     {
       title: 'Data',
@@ -27,6 +39,18 @@ function TableComponent() {
       key: 'transactionId',
     },
   ]
+
+  if (isLoading) {
+    return (
+      <div className="loader-container">
+        <Spin size="large" className="loader" />
+      </div>
+    )
+  }
+
+  if (error) {
+    return <Alert message={error} type="error" />
+  }
 
   return (
     <div className="px-[2.5rem] my-[2rem]">
