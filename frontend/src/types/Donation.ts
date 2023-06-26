@@ -1,5 +1,3 @@
-// types.ts
-
 export interface Donation {
   id: number
   name: string

@@ -10,8 +10,8 @@ interface TableProps {
 
 function TableComponent({ searchValue }: TableProps) {
   const url = searchValue
-    ? `http://besufbt.eastus.cloudapp.azure.com/api/getdonation?name=${searchValue}`
-    : 'http://besufbt.eastus.cloudapp.azure.com/api/getalldonations'
+    ? `http://localhost:3000/api/getdonation?name=${searchValue}`
+    : 'http://localhost:3000/api/getalldonations'
 
   const { data: donations, isLoading, error } = useFetch(url)
 
@@ -52,12 +52,23 @@ function TableComponent({ searchValue }: TableProps) {
     return <Alert message={error} type="error" />
   }
 
+  const pagination = {
+    defaultPageSize: 6,
+    pageSizeOptions: ['6', '10', '20'],
+    showSizeChanger: true,
+  }
+
   return (
     <div className="px-[2.5rem] my-[2rem]">
       <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2">
         Doações
       </h2>
-      <Table columns={columns} dataSource={donations} rowKey="transactionId" />
+      <Table
+        columns={columns}
+        dataSource={donations}
+        pagination={pagination}
+        rowKey="transactionId"
+      />
     </div>
   )
 }

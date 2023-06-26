@@ -7,8 +7,8 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 const App = () => {
   const [searchValue, setSearchValue] = useState<string>('')
   const queryClient = new QueryClient()
-  console.log(import.meta.env.VITE_APP_CLIENT_ID) // Test the environment variable
-  console.log(import.meta.env.VITE_APP_CLIENT_SECRET) // Test the environment variable
+  console.log(import.meta.env.VITE_APP_CLIENT_ID)
+  console.log(import.meta.env.VITE_APP_CLIENT_SECRET)
 
   return (
     <QueryClientProvider client={queryClient}>

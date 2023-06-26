@@ -1,8 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'http://besufbt.eastus.cloudapp.azure.com/api'
+const baseURL = 'http://localhost:3000/api'
 
-// Define the axios instance
 const api = axios.create({
   baseURL,
   headers: {
@@ -13,7 +12,7 @@ const api = axios.create({
     )}`,
   },
 })
-// Function to get all donations
+
 export const getAllDonations = async () => {
   try {
     const response = await api.get('/getalldonations')
@@ -24,7 +23,6 @@ export const getAllDonations = async () => {
   }
 }
 
-// Function to get donation count
 export const getDonationCount = async () => {
   try {
     const response = await api.get('/getdonationcount')
@@ -35,7 +33,6 @@ export const getDonationCount = async () => {
   }
 }
 
-// Function to get a donation by name
 export const getDonationByName = async (name: string) => {
   try {
     const response = await api.get(`/getdonation?name=${name}`)

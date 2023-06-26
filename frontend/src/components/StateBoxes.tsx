@@ -24,7 +24,7 @@ function StateBoxes() {
   }, [totalDonations, goal])
 
   if (!totalDonations || !donations || !topDonor || !donationCount) {
-    return null // or render a loading spinner
+    return null
   }
 
   return (
