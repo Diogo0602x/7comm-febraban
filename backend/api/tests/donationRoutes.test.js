@@ -15,6 +15,7 @@ describe("Donations", () => {
       chai
         .request(server)
         .post("/api/addDonation")
+        .auth(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
         .send(donation)
         .end((err, res) => {
           res.should.have.status(201);
@@ -29,6 +30,7 @@ describe("Donations", () => {
       chai
         .request(server)
         .get("/api/getDonation")
+        .auth(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
         .query({name})
         .end((err, res) => {
           res.should.have.status(201);
@@ -42,6 +44,7 @@ describe("Donations", () => {
       chai
         .request(server)
         .get("/api/getDonationCount")
+        .auth(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
         .end((err, res) => {
           res.should.have.status(201);
           done();
@@ -54,6 +57,7 @@ describe("Donations", () => {
       chai
         .request(server)
         .get("/api/getAllDonations")
+        .auth(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
         .end((err, res) => {
           res.should.have.status(201);
           res.body.should.be.a("array");
