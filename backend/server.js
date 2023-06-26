@@ -5,6 +5,38 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 
+const path = require('path');
+
+function authentication(req, res, next) {
+	const authheader = req.headers.authorization;
+
+	if (!authheader) {
+		let err = new Error('Você não está autenticado!');
+		res.setHeader('WWW-Authenticate', 'Basic');
+		err.status = 401;
+		return next(err);
+	}
+
+	const auth = new Buffer.from(authheader.split(' ')[1],
+		'base64').toString().split(':');
+	const user = auth[0];
+	const pass = auth[1];
+
+	if (user == process.env.CLIENT_ID && pass == process.env.CLIENT_SECRET) {
+
+		next();
+	} else {
+		let err = new Error('Você não está autenticado!');
+		res.setHeader('WWW-Authenticate', 'Basic');
+		err.status = 401;
+		return next(err);
+	}
+
+}
+
+app.use(authentication)
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(cors());
 
 app.use(bodyParser.json());
