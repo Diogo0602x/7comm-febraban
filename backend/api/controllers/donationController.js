@@ -1,6 +1,5 @@
-const { Web3 } = require('web3');
+const Web3 = require('web3');
 require('dotenv').config();
-const request = require('request');
 const server = require("../../server");
 
 const web3 = new Web3(process.env.BESU_RPC); // Update this line
@@ -17,7 +16,7 @@ exports.addDonation = async (req, res) => {
     web3.eth.accounts.wallet.add(account);
     web3.eth.defaultAccount = account.address;
 
-    var transfer = contract.methods.donate(name, quantity);
+    var transfer = contract.methods.donate(name, parseInt(quantity*100)); // solidity não tem float, anda-se 2 casas para a esquerda
     var encodedABI = transfer.encodeABI();
 
     var tx = {
@@ -38,11 +37,34 @@ exports.addDonation = async (req, res) => {
 };
 
 exports.getDonation = async(req, res) => {
-  
+
   try {
-    var result = await contract.methods.getDonation(req.query.id).call();
-    result = JSON.stringify(result, (_, v) => typeof v === 'bigint' ? Number(v) : v);
-    res.status(201).json(result);
+    
+    var blocknumber = Number(await web3.eth.getBlockNumber());
+  
+    var from = 194190;
+    var n = 1000;
+    var resultfinal = []
+      
+    while( from <= blocknumber ) {
+      var to = from + n > blocknumber ? blocknumber : from + n ;
+      var result = await contract.getPastEvents('DonationAdded', {
+        filter: { donorNameHash: web3.utils.sha3(web3.eth.abi.encodeParameter("string", req.query.name))},
+        fromBlock: from,
+        toBlock: to
+      });
+      from += n;
+      for(var i = 0; i < result.length; i++){
+        resultfinal.push({
+          id: Number(result[i].returnValues.id),
+          name: result[i].returnValues.donorName, 
+          amount: Number(parseFloat(result[i].returnValues.amount)/100).toFixed(2),
+          timestamp: Number(result[i].returnValues.blockTimestamp),
+          transactionId: result[i].transactionHash })
+      }
+    }
+
+    res.status(201).json(resultfinal);
     res.send();
 
   } catch (error) {
@@ -64,33 +86,39 @@ exports.getDonationCount = async(req, res) => {
   }
 
 };
-/*
+
 exports.getAllDonations = async(req, res) => {
 
   try {
-    var count;
-    request(server, (error, response, body) => {
-      // Printing the error if occurred
-      if (error) console.log(error)
-   
-      // Printing status code
-      console.log(response.statusCode);
-   
-      // Printing body
-      console.log(body);
-   })
-   .get("/api/getdonationcount").end((res) => {
-    count = res;
-  });
-
-    for(var i=0;i<3;i++){
-      console.log(res);
+    
+    var blocknumber = Number(await web3.eth.getBlockNumber());
+  
+    var from = 194190;
+    var n = 1000;
+    var resultfinal = []
+      
+    while( from <= blocknumber ) {
+      var to = from + n > blocknumber ? blocknumber : from + n ;
+      var result = await contract.getPastEvents('DonationAdded', {
+        fromBlock: from,
+        toBlock: to
+      });
+      from += n;
+      for(var i = 0; i < result.length; i++){
+        resultfinal.push({
+          id: Number(result[i].returnValues.id),
+          name: result[i].returnValues.donorName,
+          amount: Number(parseFloat(result[i].returnValues.amount)/100).toFixed(2),
+          timestamp: Number(result[i].returnValues.blockTimestamp),
+          transactionId: result[i].transactionHash })
+      }
     }
-    res.status(201);
+
+    res.status(201).json(resultfinal);
     res.send();
 
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred while getting the donation' });
+    res.status(500).json({ error: 'An error occurred while getting all the donations' });
   }
 
-};*/
+};

@@ -10,11 +10,11 @@ describe("Donations", () => {
     it("it should POST a donation", (done) => {
       const donation = {
         name: "Test",
-        quantity: 10
+        quantity: 10.31
       };
       chai
         .request(server)
-        .post("/api/post")
+        .post("/api/addDonation")
         .send(donation)
         .end((err, res) => {
           res.should.have.status(201);
@@ -24,12 +24,12 @@ describe("Donations", () => {
   });
 
   describe("/GET donation", () => {
-    it("it should GET a donation", (done) => {
-      const id = 1;
+    it("it should GET a donation by name", (done) => {
+      const name = 'Test';
       chai
         .request(server)
-        .get("/api/getdonation")
-        .query({id})
+        .get("/api/getDonation")
+        .query({name})
         .end((err, res) => {
           res.should.have.status(201);
           done();
@@ -41,25 +41,25 @@ describe("Donations", () => {
     it("it should GET the amount of donations", (done) => {
       chai
         .request(server)
-        .get("/api/getdonationcount")
+        .get("/api/getDonationCount")
         .end((err, res) => {
           res.should.have.status(201);
           done();
         });
     });
   });
-/*
+
   describe("/GET all donations", () => {
     it("it should GET all donations", (done) => {
       chai
         .request(server)
-        .get("/api/getalldonations")
+        .get("/api/getAllDonations")
         .end((err, res) => {
           res.should.have.status(201);
-          res.body.should.be.a("object");
+          res.body.should.be.a("array");
           done();
         });
     });
-  });*/
+  });
 
 });

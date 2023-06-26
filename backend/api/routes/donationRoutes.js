@@ -3,9 +3,9 @@ const router = express.Router();
 
 const donationController = require("../controllers/donationController");
 
-router.post("/post", donationController.addDonation);
-router.get("/getdonation", donationController.getDonation);
-router.get("/getdonationcount", donationController.getDonationCount);
-// router.get("/getalldonations", donationController.getAllDonations);
+router.post("/addDonation", donationController.addDonation);
+router.get("/getDonation", donationController.getDonation);
+router.get("/getDonationCount", donationController.getDonationCount);
+router.get("/getAllDonations", donationController.getAllDonations);
 
 module.exports = router;
