@@ -13,11 +13,11 @@ function TableComponent({ searchValue }: TableProps) {
     ? `http://besufbt.eastus.cloudapp.azure.com/api/getdonation?name=${searchValue}`
     : 'http://besufbt.eastus.cloudapp.azure.com/api/getalldonations'
 
-  const { data: donations, isLoading, error } = useFetch(url)
+  const { data: donations, initialLoading, error } = useFetch(url)
 
   const columns = [
     {
-      title: 'De',
+      title: 'Doador',
       dataIndex: 'name',
       key: 'name',
     },
@@ -40,7 +40,7 @@ function TableComponent({ searchValue }: TableProps) {
     },
   ]
 
-  if (isLoading) {
+  if (initialLoading) {
     return (
       <div className="loader-container">
         <Spin size="large" className="loader" />
@@ -52,9 +52,13 @@ function TableComponent({ searchValue }: TableProps) {
     return <Alert message={error} type="error" />
   }
 
+  const sortedDonations = [...donations].sort(
+    (a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+  )
+
   const pagination = {
-    defaultPageSize: 6,
-    pageSizeOptions: ['6', '10', '20'],
+    defaultPageSize: 4,
+    pageSizeOptions: ['10', '15', '20'],
     showSizeChanger: true,
   }
 
@@ -65,7 +69,7 @@ function TableComponent({ searchValue }: TableProps) {
       </h2>
       <Table
         columns={columns}
-        dataSource={donations}
+        dataSource={sortedDonations}
         pagination={pagination}
         rowKey="transactionId"
       />

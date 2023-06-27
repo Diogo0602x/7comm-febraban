@@ -4,6 +4,8 @@ const formatTimestamp = (timestamp: number): string => {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
   }
   return date.toLocaleDateString('pt-BR', options)
 }

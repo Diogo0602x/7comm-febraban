@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios, { AxiosError } from 'axios'
 
 const useFetch = (url: string) => {
   const [data, setData] = useState<any[]>([])
+  const [initialLoading, setInitialLoading] = useState<boolean>(true)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+  const intervalRef = useRef<number>()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,13 +27,21 @@ const useFetch = (url: string) => {
         setError(axiosError.message)
       } finally {
         setIsLoading(false)
+        setInitialLoading(false)
       }
     }
 
     fetchData()
+    intervalRef.current = window.setInterval(fetchData, 5000)
+
+    return () => {
+      if (intervalRef.current) {
+        window.clearInterval(intervalRef.current)
+      }
+    }
   }, [url])
 
-  return { data, isLoading, error }
+  return { data, initialLoading, isLoading, error }
 }
 
 export default useFetch

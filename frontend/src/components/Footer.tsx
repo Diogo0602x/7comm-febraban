@@ -1,36 +1,31 @@
-import React from 'react'
-import { FaInstagram, FaLinkedin, FaGlobe } from 'react-icons/fa'
-import besu from '../assets/besu-logo.svg'
+import besu from '../assets/besu.png'
+import finansystech from '../assets/finansystech.png'
+import amigos from '../assets/amigos.png'
 
 const Footer = () => (
-  <div className="footer flex justify-between items-center mx-[2rem] mt-auto">
-    <div className="flex items-center space-x-[1rem] mb-[1rem]">
-      <a
-        href="https://www.instagram.com/7comm_oficial/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <FaInstagram size={30} className="text-primary hover:text-secondary" />
-      </a>
-      <a
-        href="https://www.linkedin.com/company/7comm/mycompany/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <FaLinkedin size={30} className="text-primary hover:text-secondary" />
-      </a>
-      <a href="https://www.7comm.com.br/" target="_blank" rel="noreferrer">
-        <FaGlobe size={30} className="text-primary hover:text-secondary" />
-      </a>
-    </div>
-    <div className="flex items-center">
-      <div className="flex items-center space-x-[1rem]">
-        <div className="text-black font-semibold">Powered by</div>
-        <img src={besu} alt="Besu logo" className="w-[100px] h-[30px]" />
+  <div className="footer  border-t border-gray-400 shadow-lg mt-auto">
+    <div className="flex justify-between items-center mx-[2rem]  ">
+      <div className="flex items-center">
+        <div className="flex items-center space-x-[1rem]">
+          <div className="text-black font-bold">Em parceria com:</div>
+          <img
+            src={finansystech}
+            alt="Finansystech logo"
+            className="w-[120px] h-full"
+          />
+          <img src={amigos} alt="Amigos logo" className="w-[90px] h-full" />
+        </div>
       </div>
-      <span className=" text-2xl font-bold px-[2rem]">-</span>
-      <div className="copyright font-semibold">
-        2023 Todos os direitos reservados 7COMm
+      <div className="flex items-center justify-center flex-grow">
+        <div className="text-black font-bold">
+          © 2023 7COMm - Todos os direitos reservados
+        </div>
+      </div>
+      <div className="flex items-center">
+        <div className="flex items-center space-x-[1rem]">
+          <div className="text-black font-bold">Powered by</div>
+          <img src={besu} alt="Besu logo" className="w-[120px] h-full" />
+        </div>
       </div>
     </div>
   </div>

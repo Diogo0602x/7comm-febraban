@@ -4,10 +4,10 @@ import { useMemo } from 'react'
 import { Donation } from '../types/Donation'
 
 export const useTotalDonations = () => {
-  const { data: donations } = useAllDonations()
+  const { data: donations = [] } = useAllDonations()
 
   const totalDonations = useMemo(() => {
-    return donations?.reduce(
+    return donations.reduce(
       (total: number, donation: Donation) =>
         total + parseFloat(donation.amount),
       0,
@@ -18,9 +18,13 @@ export const useTotalDonations = () => {
 }
 
 export const useDonationCount = () => {
-  return useQuery('donationCount', getDonationCount)
+  return useQuery('donationCount', getDonationCount, {
+    refetchInterval: 5000,
+  })
 }
 
 export const useAllDonations = () => {
-  return useQuery('allDonations', getAllDonations)
+  return useQuery('allDonations', getAllDonations, {
+    refetchInterval: 5000,
+  })
 }
