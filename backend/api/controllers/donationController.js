@@ -42,7 +42,7 @@ exports.getDonation = async(req, res) => {
     
     var blocknumber = Number(await web3.eth.getBlockNumber());
   
-    var from = 194190;
+    var from = 217726;
     var n = 1000;
     var resulttotal = []
       
@@ -64,7 +64,7 @@ exports.getDonation = async(req, res) => {
       }
     }
     
-    var resultfinal = resulttotal.filter(obj => obj.name.indexOf(req.query.name) > -1);
+    var resultfinal = resulttotal.filter(obj => obj.name.toLowerCase().indexOf(req.query.name.toLowerCase()) > -1);
     res.status(201).json(resultfinal);
     res.send();
 
@@ -94,7 +94,7 @@ exports.getAllDonations = async(req, res) => {
     
     var blocknumber = Number(await web3.eth.getBlockNumber());
   
-    var from = 194190;
+    var from = 217726;
     var n = 1000;
     var resultfinal = []
       

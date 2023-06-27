@@ -4936,12 +4936,12 @@
     "1337": {
       "events": {},
       "links": {},
-      "address": "0x4261D524bc701dA4AC49339e5F8b299977045eA5",
-      "transactionHash": "0xf377c16ffb4c9af11917b7c5f742c1aebf8569d78204853b23c4235a4f007ac8"
+      "address": "0x47b33c2D3e928FDf2c0A82FcD7042Ae0cFd5862A",
+      "transactionHash": "0x75748d24550d9944cbf42f986d13fbba113e81627a2198c3afc87fa6a1fc0a5b"
     }
   },
   "schemaVersion": "3.4.14",
-  "updatedAt": "2023-06-26T04:02:32.103Z",
+  "updatedAt": "2023-06-27T08:15:22.149Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

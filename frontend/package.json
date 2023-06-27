@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@ethersproject/providers": "^5.7.2",
+    "@mui/material": "^5.13.6",
     "@syncfusion/ej2-react-charts": "^21.2.10",
     "@syncfusion/ej2-react-grids": "^21.2.10",
     "@syncfusion/ej2-react-lists": "^21.2.9",
