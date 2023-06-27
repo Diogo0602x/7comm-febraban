@@ -56,13 +56,13 @@ function TableComponent({ searchValue }: TableProps) {
   )
 
   const pagination = {
-    defaultPageSize: 7,
+    defaultPageSize: 5,
     pageSizeOptions: ['10', '15', '20'],
     showSizeChanger: true,
   }
 
   return (
-    <div className="px-[2.5rem] my-[2rem] ">
+    <div className="px-[2.5rem] my-[2rem]">
       <div className="bg-white  rounded-lg shadow-lg shadow-gray-300">
         <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold p-4 text-slate-600">
           Doações

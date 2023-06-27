@@ -7,6 +7,10 @@ export const useTotalDonations = () => {
   const { data: donations = [] } = useAllDonations()
 
   const totalDonations = useMemo(() => {
+    if (!donations || donations.length === 0) {
+      return 0
+    }
+
     return donations.reduce(
       (total: number, donation: Donation) =>
         total + parseFloat(donation.amount),
