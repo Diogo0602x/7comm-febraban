@@ -11,14 +11,14 @@ const NavBar = ({ onSearch }: { onSearch: (value: string) => void }) => {
   }
 
   return (
-    <div className=" border-b  shadow-lg shadow-blue-200/50">
+    <div className=" border-b  shadow-lg ">
       <div className=" flex justify-between items-center mx-[2rem] ">
         <img src={logo} alt="logo" className="max-w-[200px]" />
         <form onSubmit={handleSubmit} className="relative">
           <input
-            className="search pr-10 rounded border-2 border-primary focus:border-secondary focus:outline-none py-2 px-4"
+            className="search pr-10 rounded  focus:border-secondary focus:outline-none py-2 px-4"
             type="search"
-            placeholder="Busque por doador"
+            placeholder="Busca por doador"
             value={inputValue}
             onChange={(event) => setInputValue(event.target.value)}
           />

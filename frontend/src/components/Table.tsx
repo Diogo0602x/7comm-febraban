@@ -9,8 +9,8 @@ interface TableProps {
 
 function TableComponent({ searchValue }: TableProps) {
   const url = searchValue
-    ? `http://host.docker.internal:3000/api/getdonation?name=${searchValue}`
-    : 'http://host.docker.internal:3000/api/getalldonations'
+    ? `http://localhost:3000/api/getdonation?name=${searchValue}`
+    : 'http://localhost:3000/api/getalldonations'
 
   const { data: donations, initialLoading, error } = useFetch(url)
 
@@ -56,22 +56,25 @@ function TableComponent({ searchValue }: TableProps) {
   )
 
   const pagination = {
-    defaultPageSize: 4,
+    defaultPageSize: 7,
     pageSizeOptions: ['10', '15', '20'],
     showSizeChanger: true,
   }
 
   return (
-    <div className="px-[2.5rem] my-[2rem]">
-      <h2 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2">
-        Doações
-      </h2>
-      <Table
-        columns={columns}
-        dataSource={sortedDonations}
-        pagination={pagination}
-        rowKey="transactionId"
-      />
+    <div className="px-[2.5rem] my-[2rem] ">
+      <div className="bg-white  rounded-lg shadow-lg shadow-gray-300">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold p-4 text-slate-600">
+          Doações
+        </h2>
+        <Table
+          columns={columns}
+          dataSource={sortedDonations}
+          pagination={pagination}
+          className="pr-2"
+          rowKey="transactionId"
+        />
+      </div>
     </div>
   )
 }

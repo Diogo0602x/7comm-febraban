@@ -6,6 +6,7 @@ import {
   useDonationCount,
 } from '../hooks/donationHooks'
 import { Donation } from '../types/Donation'
+import { FaDollarSign, FaUsers, FaBullseye, FaTrophy } from 'react-icons/fa'
 
 function StateBoxes() {
   const { data: totalDonations } = useTotalDonations()
@@ -37,36 +38,47 @@ function StateBoxes() {
   return (
     <section className="px-[2.5rem] my-[2rem]">
       <div className="flex justify-between space-x-4 ">
-        <div className="bg-white p-4 rounded-lg shadow-lg shadow-blue-300/50 w-1/4">
-          <h2 className="font-bold text-xl mb-2 ">Total de Doações</h2>
-          <p
-            className={`text-lg ${
-              totalDonations > 0 ? 'text-green-500' : 'text-red-500'
-            }`}
-          >{`${printPrice(totalDonations)}`}</p>
+        <div className="bg-white  p-4 rounded-lg shadow-lg shadow-gray-300 w-1/4">
+          <FaDollarSign size={24} className="mb-2" color="green" />
+          <p className="text-xl font-bold text-black">{`${printPrice(
+            totalDonations,
+          )}`}</p>
+          <h2 className="font-semibold text-lg mt-2 text-slate-600 ">
+            Total de Doações
+          </h2>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-lg shadow-blue-300/50 w-1/4">
-          <h2 className="font-bold text-xl mb-2 ">Quantidade de Doadores</h2>
-          <p className="text-lg text-green-500">{donationCount}</p>
+        <div className="bg-white  p-4 rounded-lg shadow-lg shadow-gray-300 w-1/4">
+          <FaUsers size={24} className="mb-2" color="blue" />
+          <p className="text-xl font-bold text-black">{donationCount}</p>
+          <h2 className="font-semibold text-lg mt-2 text-slate-600">
+            Quantidade de Doadores
+          </h2>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-lg shadow-blue-300/50 w-1/4">
-          <h2 className="font-bold text-xl mb-2 ">Meta</h2>
-          <p
-            className={`text-lg ${
-              progress >= 100 ? 'text-green-500' : 'text-red-500'
-            }`}
-          >{`${progress.toFixed(1)}% (${totalDonations}/${goal})`}</p>
-        </div>
-        <div className="bg-white p-4 rounded-lg shadow-lg shadow-blue-300/50 w-1/4">
-          <h2 className="font-bold text-xl mb-2 ">Top Doador</h2>
-          <p className="text-gray-700 text-lg font-semibold">
-            {`${topDonor.name} - `}
-            <span
-              className={`text-lg ${
-                topDonor.amount > 0 ? 'text-green-500' : 'text-red-500'
-              }`}
-            >{`${printPrice(topDonor.amount)}`}</span>
+        <div className="bg-white  p-4 rounded-lg shadow-lg shadow-gray-300 w-1/4">
+          <FaBullseye
+            size={24}
+            className="mb-2"
+            color={progress === 100 ? 'green' : 'red'}
+          />{' '}
+          <p className="text-xl font-bold text-black">
+            {`${printPrice(totalDonations)} / ${printPrice(goal)} - `}
+            <span style={{ color: progress === 100 ? 'green' : 'red' }}>
+              {`(${progress.toFixed(1)}%)`}
+            </span>
           </p>
+          <h2 className="font-semibold text-lg mt-2 text-slate-600">Meta</h2>
+        </div>
+        <div className="bg-white  p-4 rounded-lg shadow-lg shadow-gray-300 w-1/4">
+          <FaTrophy size={24} className="mb-2" color="#d67400" />
+          <p className="text-black text-xl font-bold">
+            {`${topDonor.name} - `}
+            <span className="text-xl font-bold text-black">{`${printPrice(
+              topDonor.amount,
+            )}`}</span>
+          </p>
+          <h2 className="font-semibold text-lg mt-2 text-slate-600">
+            Top Doador
+          </h2>
         </div>
       </div>
     </section>
