@@ -9,8 +9,8 @@ interface TableProps {
 
 function TableComponent({ searchValue }: TableProps) {
   const url = searchValue
-    ? `http://host.docker.internal:3000/api/getdonation?name=${searchValue}`
-    : 'http://host.docker.internal:3000/api/getalldonations'
+    ? `http://besufbt.eastus.cloudapp.azure.com:3000/api/getdonation?name=${searchValue}`
+    : 'http://besufbt.eastus.cloudapp.azure.com:3000/api/getalldonations'
 
   const { data: donations, initialLoading, error } = useFetch(url)
 

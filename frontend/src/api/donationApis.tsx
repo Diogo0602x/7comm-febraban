@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'http://host.docker.internal:3000/api'
+const baseURL = 'http://besufbt.eastus.cloudapp.azure.com:3000/api'
 
 const api = axios.create({
   baseURL,
