@@ -1,4 +1,3 @@
-import React from 'react'
 import StateBoxes from '../../components/StateBoxes'
 import Table from '../../components/Table'
 

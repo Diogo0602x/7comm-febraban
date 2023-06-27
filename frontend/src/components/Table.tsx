@@ -1,4 +1,3 @@
-import React from 'react'
 import { formatTimestamp } from '../functions/formatTimestamp'
 import { Table, Spin, Alert } from 'antd'
 import useFetch from '../hooks/useFetch'
@@ -10,8 +9,8 @@ interface TableProps {
 
 function TableComponent({ searchValue }: TableProps) {
   const url = searchValue
-    ? `http://besufbt.eastus.cloudapp.azure.com/api/getdonation?name=${searchValue}`
-    : 'http://besufbt.eastus.cloudapp.azure.com/api/getalldonations'
+    ? `http://host.docker.internal:3000/api/getdonation?name=${searchValue}`
+    : 'http://host.docker.internal:3000/api/getalldonations'
 
   const { data: donations, initialLoading, error } = useFetch(url)
 

@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { printPrice } from '../functions/printPrice'
 import {
   useTotalDonations,
